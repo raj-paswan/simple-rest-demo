@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+    <application>simple-rest-demo</application>
+    <version>simple</version>
+    <service>sim</service>
+    <threadsafe>true</threadsafe>
+    <instance-class>F4_1G</instance-class>
+    <use-google-connector-j>true</use-google-connector-j>
+    <runtime>java8</runtime>
+
+    <system-properties>
+    </system-properties>
+
+    <warmup-requests-enabled>true</warmup-requests-enabled>
+
+    <auto-id-policy>legacy</auto-id-policy>
+
+    <automatic-scaling>
+        <min-idle-instances>1</min-idle-instances>
+        <min-pending-latency>1000ms</min-pending-latency>
+        <max-pending-latency>1000ms</max-pending-latency>
+        <max-concurrent-requests>50</max-concurrent-requests>
+        <max-instances>20</max-instances>
+    </automatic-scaling>
+
+    <static-files>
+        <include path="/*">
+            <http-header name="X-FRAME-OPTIONS"
+                         value="DENY"/>
+            <http-header name="X-XSS-Protection"
+                         value="1; mode=block"/>
+            <http-header name="X-Content-Type-Options"
+                         value="nosniff"/>
+            <http-header name="Content-Security-Policy"
+                         value="script-src 'self' 'unsafe-eval' *.crisp.chat *.crisp.im *.googleapis.com *.google-analytics.com *.g.doubleclick.net *.bootstrapcdn.com cdn.jsdelivr.net https://tagmanager.google.com/ https://www.googletagmanager.com/ code.jquery.com *.unpkg.com cdnjs.cloudflare.com"/>
+        </include>
+        <include path="/assets/*"/>
+    </static-files>
+
+</appengine-web-app>
